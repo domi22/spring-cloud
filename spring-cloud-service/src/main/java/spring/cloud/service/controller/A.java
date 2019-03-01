@@ -11,6 +11,8 @@ public class A {
 
     static{
         System.out.println("satic a");
+        System.out.println("satic a");
+        System.out.println("satic a");
     }
 
 }
