@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.cloud.service.mapper.BillLineMapper">
+
+    <sql id="allColumn">
+        h.id as hid
+        , h.head_id as hhead_id
+        , h.economic_issue_id as heconomic_issue_id
+        , h.economic_issue_name as heconomic_issue_name
+        , h.invoice_type as hinvoice_type
+        , h.consume_record_no as hconsume_record_no
+        , h.consume_record_detail as hconsume_record_detail
+        , h.no_consume_reason as hno_consume_reason
+        , h.currency_type_id as hcurrency_type_id
+        , h.currency_type_name as hcurrency_type_name
+        , h.amount as hamount
+        , h.exchage_rate as hexchage_rate
+        , h.ori_amount as hori_amount
+        , h.reverse_pre_amount as hreverse_pre_amount
+        , h.description as hdescription
+        , h.created_by as hcreated_by
+--         , h.created_date as hcreated_date
+        , l.id as lid
+        , l.sqe as lsqe
+        , l.line_id as lline_id
+        , l.allocation_id as lallocation_id
+        , l.segment1 as lsegment1
+        , l.segment3 as lsegment3
+        , l.segment2 as lsegment2
+        , l.segment5 as lsegment5
+        , l.segment6 as lsegment6
+        , l.allocation_amount as lallocation_amount
+        , l.allocation_desc as lallocation_desc
+    </sql>
+
+    <resultMap id="allInfo" type="spring.cloud.service.entity.RefundBillLine">
+        <id property="id" column="hid"/>
+        <result property="headId" column="hhead_id"/>
+        <result property="economicIssueId" column="heconomic_issue_id"/>
+        <result property="economicIssueName" column="heconomic_issue_name"/>
+        <result property="invoiceType" column="hinvoice_type"/>
+        <result property="consumeRecordNo" column="hconsume_record_no"/>
+        <result property="consumeRecordDetail" column="hconsume_record_detail"/>
+        <result property="noConsumeReason" column="hno_consume_reason"/>
+        <result property="currencyTypeId" column="hcurrency_type_id"/>
+        <result property="currencyTypeName" column="hcurrency_type_name"/>
+        <result property="amount" column="hamount"/>
+        <result property="exchageRate" column="hexchage_rate"/>
+        <result property="oriAmount" column="hori_amount"/>
+        <result property="reversePreAmount" column="hreverse_pre_amount"/>
+        <result property="description" column="hdescription"/>
+        <result property="createdBy" column="hcreated_by"/>
+        <result property="createdDate" column="hcreated_date"/>
+        <collection property="allocations" resultMap="allocationMap"/>
+    </resultMap>
+
+    <resultMap id="allocationMap" type="spring.cloud.service.entity.Allocation">
+        <id property="id" column="lid"/>
+        <result property="sqe" column="lsqe"/>
+        <result property="lineId" column="lline_id"/>
+        <result property="allocationId" column="lallocation_id"/>
+        <result property="segment1" column="lsegment1"/>
+        <result property="segment3" column="lsegment3"/>
+        <result property="segment2" column="lsegment2"/>
+        <result property="segment5" column="lsegment5"/>
+        <result property="segment6" column="lsegment6"/>
+        <result property="allocationAmount" column="lallocation_amount"/>
+        <result property="allocationDesc" column="lallocation_desc"/>
+    </resultMap>
+
+    <select id="queryInfos" resultMap="allInfo">
+        select
+        <include refid="allColumn"/>
+        from cost_rfb_line h
+        join cost_rfb_allocation l on h.head_id = l.line_id
+    </select>
+
+</mapper>
+
+
+
+
+
+
+

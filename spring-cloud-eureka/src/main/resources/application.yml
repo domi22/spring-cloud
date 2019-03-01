@@ -1,0 +1,10 @@
+server:
+  port: 8881
+eureka:
+  client:
+    registerWithEureka: false #是否将自己注册到eureka，默认true,作为server选择false
+    fetchRegistry: false #是否从eureka获取注册信息 默认为true,因为此时为单点，故为false
+    serviceUrl:
+      defaultZone: http://localhost:8881/erueka/  #与微服务交互的地址
+  server:
+    enableSelfPreservation: false

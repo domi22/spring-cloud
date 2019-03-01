@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>spring.cloud</groupId>
+  <artifactId>spring-cloud</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>spring-cloud</name>
+
+    <!-- 通常会加入一个common的子模块，用于常用功能的jar和版本的管理，供其他子模块使用 -->
+    <modules>
+        <module>spring-cloud-feign</module>
+        <module>spring-cloud-eureka</module>
+        <module>spring-cloud-service</module>
+        <module>spring-cloud-config</module>
+        <module>spring-cloud-zuul</module>
+        <module>spring-cloud-gateway</module>
+        <module>spring-cloud-ribbon</module>
+        <module>spring-cloud-hystrix</module>
+    </modules>
+
+  <parent>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-parent</artifactId>
+     <version>2.0.3.RELEASE</version>
+     <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <java.version>1.8</java.version>
+      <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+
+      <mybatis.spring>1.2.0</mybatis.spring>
+      <mysql.connector>8.0.7-dmr</mysql.connector>
+      <hikariCP>2.7.9</hikariCP>
+      <fast.json>1.2.41</fast.json>
+      <apach.commons>2.6</apach.commons>
+  </properties>
+
+    <!--配置的是snapshot快照库和release发布库的地址，这里是采用nexus作为镜像服务器-->
+    <!--如果在发布时使用mvn deploy -P release 的命令，那么会自动使用0.1作为发布版本，那么根据maven处理snapshot和release的规则，由于版本号后不带-SNAPSHOT故当成是正式发布版本，会被发布到release仓库-->
+  <distributionManagement>
+      <repository>
+          <id>releases</id><name>Nexus Release Repository</name><url>http://192.168.1.17:8080/repository/zxct/</url>
+      </repository>
+      <snapshotRepository>
+          <id>snapshots</id><name>Nexus Snapshot Repository</name><url>http://192.168.1.17:8080/repository/zxct/</url>
+      </snapshotRepository>
+  </distributionManagement>
+
+
+
+    <!--仅申明所管理的子模块，子模块需要显示引入所需兄弟模块的jar坐标 -->
+  <dependencyManagement>
+        <dependencies>
+            <!--声明子模块 -->
+            <dependency>
+                <groupId>spring.cloud.feign</groupId>
+                <artifactId>spring-cloud-feign</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>spring.cloud.eureka</groupId>
+                <artifactId>spring-cloud-eureka</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>spring-cloud-service</groupId>
+                <artifactId>spring-cloud-service</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>spring-cloud-config</groupId>
+                <artifactId>spring-cloud-config</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>spring-cloud-zuul</groupId>
+                <artifactId>spring-cloud-zuul</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>spring-cloud-gateway</groupId>
+                <artifactId>spring-cloud-gateway</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <!--声明公共jar依赖 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--===============.配置核心共用的jar依赖=====================-->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <!--==================== springboot2.0 - mysql - HikariCP连接池(默认) ========================-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency><!--导入spring-boot-starter-jdbc依赖springboot就默认使用Hikari数据库连接池-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>${mybatis.spring}</version>
+            <exclusions>
+                <exclusion><!--使用了HikariCP则把tomcat-jdbc连接池排除掉-->
+                    <groupId>org.apache.tomcat</groupId>
+                    <artifactId>tomcat-jdbc</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector}</version>
+        </dependency>
+
+        <!--================  常用工具包的配置==================.-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fast.json}</version>
+        </dependency>
+        <!-- apach工具包 -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${apach.commons}</version>
+        </dependency>
+
+    </dependencies>
+
+
+    <build>
+        <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+        <!--子pom文件中，省去了版本、配置细节等信息，只需要指定groupId和artifactId，其他信息均从父pom文件继承。
+        当然，如果子pom文件想定制自己的特定内容，可以另行设置，并会覆盖从父pom文件继承到的内容。-->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <finalName>${project.name}</finalName>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.source}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

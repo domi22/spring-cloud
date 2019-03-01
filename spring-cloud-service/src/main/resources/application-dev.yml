@@ -1,0 +1,81 @@
+spring:
+  datasource:
+    #数据库连接池选择算法: springboot默认支持 dbcp,dbcp2, tomcat, hikari
+      # 1 由于Tomcat数据源连接池的性能和并发， 在tomcat可用时， 我们总是优先使用它。
+      # 2 如果HikariCP可用， 我们将使用它。
+      # 3 如果Commons DBCP可用， 我们将使用它， 但在生产环境不推荐使用它。
+      # 4 最后如果Commons DBCP2可用， 我们将使用它。
+
+    url: jdbc:mysql://localhost:3306/ebuy?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver  #  new cj
+    username: root
+    password: root55
+    type: com.zaxxer.hikari.HikariDataSource
+
+    #generate-unique-name: false  # whether to generate a random datasource name
+    #name: datasourceName      # 数据源的名称。使用嵌入式数据库时默认为“testdb” -Name of the datasource. Default to "testdb" when using an embedded database.
+    #continue-on-error: false #在初始化数据库时，遇到错误是否继续，默认false
+    #jmx-enabled: false  # 是否启用JMX支持（如果由基础池提供）whether to enable JMX support (if provided by the underlying pool)
+    #jndi-name:    # 数据源的JNDI位置。, 设置时将忽略类，URL，用户名和密码 JNDI location of the datasource. Class, url, username & password are ignored when set
+
+    #initialization-mode: embedded  # 使用可用的DDL和DML脚本初始化数据源(Initialize the datasource with available DDL and DML scripts.= embedded  always  never
+    #schema: database/init.sql     # 指定启动后执行的sql文件位置(Schema (DDL) script resource references)
+    #schema-password:    #Username of the database to execute DDL scripts (if different).
+    #schema-username:     #Password of the database to execute DDL scripts (if different)
+    #separator: ;    # SQL初始化脚本中的语句分隔符 -Statement separator in SQL initialization scripts
+    #sql-script-encoding: utf-8  #SQL脚本编码
+    ##------执行DML语句的账号以及用户名密码
+    #data:        # Data (DML) script resource references
+    #data-password:  # Username of the database to execute DML scripts (if different).
+    #data-username:  # Password of the database to execute DML scripts (if different)
+    #platform: all  #在DDL或DML脚本中使用的平台 (例如 schema-platform.sqlordata−platform.sqlordata−{platform}.sql).
+
+    #xa:
+      # properties:   # 要传递给XA数据源的属性 Properties to pass to the XA data source.
+      # data-source-class-name: #org.springframework.boot.jta.bitronix.PoolingDataSourceBean.DirectXADataSource  # XA数据源完全限定名称 XA datasource fully qualified name
+    #连接池设置
+    hikari:
+      #具体配置参见 https://blog.csdn.net/MyHerux/article/details/80730690
+      minimum-idle: 3    #池中维护的最小空闲连接数 -默认-1 配置validate -10  -minIdle<0或者minIdle>maxPoolSize,则被重置为maxPoolSize
+      auto-commit: true  #自动提交从池中返回的连接 默认true
+      idle-timeout: 10000  #连接允许在池中闲置的最长时间 -默认600000ms -如果idleTimeout+1秒>maxLifetime 且 maxLifetime>0，则会被重置为0（代表永远不会退出）；如果idleTimeout!=0且小于10秒，则会被重置为10秒
+      pool-name: DatebookHikariCP    #连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中以识别池和池配置
+      max-lifetime: 1800000  #池中连接最长生命周期 默认1800000ms  -如果不等于0且小于30秒则会被重置回30分钟
+      connection-timeout: 30000  #等待来自池的连接的最大毫秒数 默认30000ms -如果小于250毫秒，则被重置回30秒
+      # health-check-properties:    #在心跳检查时传递的属性
+      # username:
+      # password:
+      # driver-class-name:   #HikariCP将尝试通过仅基于jdbcUrl的DriverManager解析驱动程序，但对于一些较旧的驱动程序，还必须指定driverClassName
+      # allow-pool-suspension: false   #控制池是否可以通过JMX暂停和恢复 -默认false
+      # catalog:    #为支持 catalog 概念的数据库设置默认 catalog
+      # connection-init-sql:
+      # connection-test-query:   #如果您的驱动程序支持JDBC4，我们强烈建议您不要设置此属性 -默认null
+      # data-source-class-name:
+      # data-source-j-n-d-i:
+      # data-source-properties:
+      # health-check-registry:     #该属性允许您指定池使用的Codahale / Dropwizard HealthCheckRegistry的实例来报告当前健康信息  -默认null
+      # isolate-internal-queries: false   #是否在其自己的事务中隔离内部池查询，例如连接活动测试 -默认false
+      # initialization-fail-timeout:    #如果池无法成功初始化连接，则此属性控制池是否将 fail fast  -默认1
+      # jdbc-url:
+      # leak-detection-threshold:  #记录消息之前连接可能离开池的时间量，表示可能的连接泄漏
+      # login-timeout:
+      # maximum-pool-size:    #池中最大连接数，包括闲置和使用中的连接 -默认值 构造-1 validate 10  -如果maxPoolSize小于1，则会被重置。当minIdle<=0被重置为DEFAULT_POOL_SIZE则为10;如果minIdle>0则重置为minIdle的值
+      # metric-registry:    #该属性允许您指定一个 Codahale / Dropwizard MetricRegistry 的实例，供池使用以记录各种指标  -默认null
+      # metrics-tracker-factory:
+      # read-only: false #从池中获取的连接是否默认处于只读模式  -默认值false
+      # register-mbeans: false   #是否注册JMX管理Bean（MBeans）  -默认是false
+      # scheduled-executor:    #此属性允许您设置将用于各种内部计划任务的java.util.concurrent.ScheduledExecutorService实例s
+      # schema:    #该属性为支持模式概念的数据库设置默认模式
+      # transaction-isolation:  #控制从池返回的连接的默认事务隔离级别
+      # validation-timeout:   #连接将被测试活动的最大时间量
+    #tomcat:
+      # springboot默认支持的连接池
+    #dbcp2:
+      # dbcp2先关设置请参考 https://blog.csdn.net/xiaolyuh123/article/details/73331093
+
+#-----------------------------------DAO层-mybatis-2/2[开始]---------------------------------
+
+
+
+
+

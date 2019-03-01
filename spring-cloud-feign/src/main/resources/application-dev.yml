@@ -1,0 +1,66 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ebuy?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver  #  new cj
+    username: root
+    password: root55
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 3    #池中维护的最小空闲连接数 -默认-1 配置validate -10  -minIdle<0或者minIdle>maxPoolSize,则被重置为maxPoolSize
+      auto-commit: true  #自动提交从池中返回的连接 默认true
+      idle-timeout: 10000  #连接允许在池中闲置的最长时间 -默认600000ms -如果idleTimeout+1秒>maxLifetime 且 maxLifetime>0，则会被重置为0（代表永远不会退出）；如果idleTimeout!=0且小于10秒，则会被重置为10秒
+      pool-name: DatebookHikariCP    #连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中以识别池和池配置
+      max-lifetime: 1800000  #池中连接最长生命周期 默认1800000ms  -如果不等于0且小于30秒则会被重置回30分钟
+      connection-timeout: 30000  #等待来自池的连接的最大毫秒数 默认30000ms -如果小于250毫秒，则被重置回30秒
+
+#-----------------------------------spring cloud open feign---------------------------------
+feign:
+  compression:
+    request:
+      enable: true #支持请求压缩
+      mime-types: text/xml,application/xml,application/json  #配置支持压缩的MIME TYPE
+      min-request-size: 2048  #压缩数据大小的下限
+    response:
+      enable: true #支持响应压缩
+  client:
+    config:
+#      feignName: SPRING-CLOUD-SERVICE   #作用于单个服务
+#        connectTimeout: 5000
+      default:
+        connectTimeout: 5000  #作用于全局
+  hystrix:
+    enable: true
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+
+
+
+#-----------------------------------ribbon 设置---------------------------------
+ribbon:
+  ReadTimeout: 120000         #请求处理超时时间
+  ConnectionTimeout: 30000   #请求连接超时时间
+
+
+#-----------------------------------hystrix 设置---------------------------------
+hystrix:
+  shareSecurityContext: true
+  command:
+    default:
+      ciruitBreaker:
+        sleepWindowInMilliseconds: 100000
+        forceClosed: true
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000
+
+
+
+
+
+
+
+
+
