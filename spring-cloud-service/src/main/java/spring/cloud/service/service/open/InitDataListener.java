@@ -16,6 +16,7 @@ public class InitDataListener implements InitializingBean,ServletContextAware {
     private BillLineService billLineService;
     public static List<RefundBillLine> refundBillLines;
 
+
     @Override
     public void afterPropertiesSet() throws Exception {}
 
