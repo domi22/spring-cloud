@@ -32,13 +32,6 @@ public class BillLineController {
 
     @GetMapping("/bills")
     public String queryBill() throws Exception{
-        Config config = new Config();
-        config.useSingleServer().setAddress("redis://127.0.0.1:6379");
-        RedissonClient redisson = Redisson.create(config);
-        RLock lockName = redisson.getLock("lockName");
-        InetAddress localHost = InetAddress.getLocalHost();
-        String hostName = localHost.getHostName();
-        List<RefundBillLine> refundBillLines1 = InitDataListener.refundBillLines;
         List<RefundBillLine> refundBillLines = billLineService.queryAll();
         return CollectionUtils.isEmpty(refundBillLines) ? "" : JSON.toJSONString(refundBillLines);
     }
