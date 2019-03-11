@@ -1,12 +1,6 @@
 package spring.cloud.service.controller;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.commons.lang3.SystemUtils;
-import org.apache.commons.lang.StringUtils;
-import org.redisson.Redisson;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
-import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.util.CollectionUtils;
@@ -31,13 +25,13 @@ public class BillLineController {
     BillLineService billLineService;
 
     @GetMapping("/bills")
-    public String queryBill() throws Exception{
+    public String queryBill(){
         List<RefundBillLine> refundBillLines = billLineService.queryAll();
         return CollectionUtils.isEmpty(refundBillLines) ? "" : JSON.toJSONString(refundBillLines);
     }
 
     @PostMapping(value = "/upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String uploadFile(MultipartFile file) throws Exception {
+    public String uploadFile(MultipartFile file){
         return file.getOriginalFilename();
     }
 

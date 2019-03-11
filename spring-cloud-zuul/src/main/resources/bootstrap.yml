@@ -1,5 +1,5 @@
 server:
-  port: 8886
+  port: 8882
   servlet:
     context-path: /spring-cloud-zuul
 spring:
