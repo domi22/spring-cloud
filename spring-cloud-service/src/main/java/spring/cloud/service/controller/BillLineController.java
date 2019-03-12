@@ -13,8 +13,10 @@ import spring.cloud.service.entity.RefundBillLine;
 import spring.cloud.service.service.BillLineService;
 import spring.cloud.service.service.open.InitDataListener;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 @RequestMapping("/service")
@@ -25,7 +27,9 @@ public class BillLineController {
     BillLineService billLineService;
 
     @GetMapping("/bills")
-    public String queryBill(){
+    public String queryBill(HttpServletRequest request,String param){
+        ConcurrentHashMap map = new ConcurrentHashMap(32);
+        Object o = map.computeIfAbsent("12",k -> {return "123";});
         List<RefundBillLine> refundBillLines = billLineService.queryAll();
         return CollectionUtils.isEmpty(refundBillLines) ? "" : JSON.toJSONString(refundBillLines);
     }

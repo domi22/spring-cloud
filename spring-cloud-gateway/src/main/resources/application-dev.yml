@@ -15,15 +15,40 @@ spring:
 #-----------------------------------DAO层-mybatis-2/2[开始]---------------------------------
   cloud:
     gateway:
-      discovery:
+      discovery: #动态路由在前会先触发，不满足url中待服务ID的请求则触发后续的断言路由
         locator:
           enabled: true
           lower-case-service-id: true
-      routes:
+      routes:   # 断言种类 After Before Between Cookie Header Host Method Query 等
       - id: after_route
         uri: http://baidu.com
         predicates:
         - Before=2019-03-11T19:11:10.647+08:00[Asia/Shanghai]
+      - id: cookie_route
+        uri: http://localhost:8883/spring-cloud-service/service/bills
+        predicates:
+        - Cookie=choose,ch
+
+      # 过滤器设置-- 请求头里面增加 header、param
+      - id: header_filter
+        uri: http://localhost:8883/spring-cloud-service/service/bills
+        filters:
+        - AddRequestHeader=NewHeader, Bar
+        - AddRequestParameter=param, paramValue
+        predicates:
+        - Before=2019-03-11T19:11:10.647+08:00[Asia/Shanghai]
+management:
+#  security:
+#    enabled: false   已经有全局开启了
+  endpoint:
+    gateway:
+      enabled: true  # 具体端点API参见 GatewayControllerEndpoint 类
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
 
 
 
