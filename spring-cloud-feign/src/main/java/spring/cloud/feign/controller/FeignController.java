@@ -1,5 +1,7 @@
 package spring.cloud.feign.controller;
 
+import feign.RequestInterceptor;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +18,7 @@ public class FeignController {
     private FeignService feignService;
 
     @RequestMapping("/bills")
-    public String getBillByFeign() {
+    public String getBillByFeign(HttpServletRequest request) {
         return feignService.getBill();
     }
 

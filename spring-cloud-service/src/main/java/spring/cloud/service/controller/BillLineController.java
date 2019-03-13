@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import spring.cloud.common.interceptor.UserInfoContext;
+import spring.cloud.common.vo.User;
 import spring.cloud.service.entity.RefundBillLine;
 import spring.cloud.service.service.BillLineService;
 import spring.cloud.service.service.open.InitDataListener;
@@ -28,6 +30,7 @@ public class BillLineController {
 
     @GetMapping("/bills")
     public String queryBill(HttpServletRequest request,String param){
+        User user = UserInfoContext.getUser();
         ConcurrentHashMap map = new ConcurrentHashMap(32);
         Object o = map.computeIfAbsent("12",k -> {return "123";});
         List<RefundBillLine> refundBillLines = billLineService.queryAll();

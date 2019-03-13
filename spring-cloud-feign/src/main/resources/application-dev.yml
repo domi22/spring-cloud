@@ -42,7 +42,6 @@ ribbon:
   ReadTimeout: 120000         #请求处理超时时间
   ConnectionTimeout: 30000   #请求连接超时时间
 
-
 #-----------------------------------hystrix 设置---------------------------------
 hystrix:
   shareSecurityContext: true

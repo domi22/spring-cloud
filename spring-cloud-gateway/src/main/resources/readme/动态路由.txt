@@ -1,0 +1,49 @@
+一 动态路由实现
+0- 引入
+1- 定义模型对象 GatewayFilterDefinition、 GatewayPredicateDefinition 、GatewayRouteDefinition
+2- 编写动态路由实现类 DynamicRouteServiceImpl
+3- 编写Rest接口 RouteController
+4- 引入jar包及yml开启端点访问
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+management:
+  endpoint:
+    gateway:
+      enabled: true  # 具体端点API参见 GatewayControllerEndpoint 类
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+----------------------param demo----------------------------------------
+{
+    "route_id": "CompositeDiscoveryClient_SPRING-CLOUD-SERVICE",
+    "route_definition": {
+      "id": "CompositeDiscoveryClient_SPRING-CLOUD-SERVICE",
+      "predicates": [
+        {
+          "name": "Path",
+          "args": {
+            "pattern": "/spring-cloud-service/**"
+          }
+        }
+      ],
+      "filters": [
+        {
+          "name": "RewritePath",
+          "args": {
+            "regexp": "/spring-cloud-service/(?<remaining>.*)",
+            "replacement": "/${remaining}"
+          }
+        }
+      ],
+      "uri": "lb://SPRING-CLOUD-SERVICE",
+      "order": 0
+    },
+    "order": 0
+  }

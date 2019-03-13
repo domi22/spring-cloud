@@ -1,0 +1,25 @@
+（gateway + JWT + 服务间鉴权）
+
+一 网关认证
+1- 引入jar
+<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+</dependency>
+<dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jwt.version}</version>
+</dependency>
+
+2- Jwt工具类（生成token + 解析token）
+package spring.cloud.gateway.common.JwtUtil.java
+
+3- 添加GlobalFilter
+package spring.cloud.gateway.filter.AuthFilter
+
+
+二 开发common工程（详见服务spring-cloud-common）
+
+三 各服务组件之间鉴权
+
