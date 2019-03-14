@@ -1,11 +1,11 @@
-package spring.cloud.common.interceptor;
+package spring.cloud.common.filter;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import spring.cloud.common.context.UserInfoContext;
 import spring.cloud.common.vo.User;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -30,12 +30,11 @@ public class TransmitUserInfoFilter implements Filter {
         String userJson = request.getHeader(UserInfoContext.USERINFO_KEY);
         if (StringUtils.isNotBlank(userJson)) {
             try {
-                userJson = URLDecoder.decode(userJson,"UTF-8");
+                userJson = URLDecoder.decode(userJson,UserInfoContext.USERINFO_DECODER);
                 User userInfo = (User) JSON.parseObject(userJson,User.class);
-                //将UserInfo放入上下文中
                 UserInfoContext.setUser(userInfo);
             } catch (UnsupportedEncodingException e) {
-                log.error("init userInfo error",e);
+                log.error("get userInfo from feign request header error",e);
             }
         }
     }

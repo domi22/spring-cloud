@@ -1,4 +1,4 @@
-package spring.cloud.common.interceptor;
+package spring.cloud.common.context;
 
 import spring.cloud.common.vo.User;
 

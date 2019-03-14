@@ -18,8 +18,73 @@ package spring.cloud.gateway.common.JwtUtil.java
 3- 添加GlobalFilter
 package spring.cloud.gateway.filter.AuthFilter
 
+package spring.cloud.gateway.filter;
 
-二 开发common工程（详见服务spring-cloud-common）
+import java.net.URI;
+import java.util.List;
+import java.util.Map;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.cloud.gateway.route.Route;
+import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.server.PathContainer;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
+import spring.cloud.gateway.common.JwtUtil;
+import spring.cloud.gateway.exception.PermissionException;
 
-三 各服务组件之间鉴权
+@Component
+public class AuthFilter implements GlobalFilter {
+
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        Route gatewayUrl = exchange.getRequiredAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
+        URI uri = gatewayUrl.getUri();
+        ServerHttpRequest request = (ServerHttpRequest)exchange.getRequest();
+        HttpHeaders header = request.getHeaders();
+        String token = header.getFirst(JwtUtil.HEADER_AUTH);
+
+        // TODO 没有携带token的则判断URL，若是访问登录接口则放行，其他的则返回错误码，提示登录
+        passLogin(request, token);
+
+        Map<String,String> userMap = JwtUtil.validateToken(token);
+        ServerHttpRequest.Builder mutate = request.mutate();
+        if(userMap.get("user").equals("admin") || userMap.get("user").equals("spring") || userMap.get("user").equals("cloud")) {
+            mutate.header("x-user-id", userMap.get("id"));
+            mutate.header("x-user-name", userMap.get("user"));
+            //x-user-serviceName 表示下游请求对应的服务名如 SPRING-CLOUD-SERVICE  SPRING-CLOUD-GATEWAY
+            mutate.header("x-user-serviceName", uri.getHost());
+        }else {
+            throw new PermissionException("user not exist, please check");
+        }
+        ServerHttpRequest buildReuqest =  mutate.build();
+        return chain.filter(exchange.mutate().request(buildReuqest).build());
+    }
+
+    /**
+     * 对于没有携带token的，且是访问登录接口的请求，不做认证，直接执行登录操作
+     * @param request
+     * @param token
+     */
+    private void passLogin(ServerHttpRequest request, String token) {
+        if (StringUtils.isBlank(token)) {
+            PathContainer pathContainer = request.getPath().pathWithinApplication();
+            String value = pathContainer.value();
+            List<PathContainer.Element> elements = pathContainer.elements();
+            int getToken = value.indexOf("getToken");
+            //若是访问登录接口则放行
+            if (getToken > 0) {
+                int end = value.lastIndexOf("/");
+                String name = value.substring(getToken + "getToken".length() + 1, end);
+                String admin = JwtUtil.generateToken(name, "123");
+                throw new PermissionException("please login to get the token:" + admin);
+            }
+        }
+    }
+}
+
 

@@ -8,15 +8,23 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
+import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.PathContainer;
+import org.springframework.http.server.reactive.ReactorHttpHandlerAdapter;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.adapter.HttpWebHandlerAdapter;
 import reactor.core.publisher.Mono;
 import spring.cloud.gateway.common.JwtUtil;
 import spring.cloud.gateway.exception.PermissionException;
 
+/**
+ * 参数参考 https://blog.csdn.net/tianyaleixiaowu/article/details/83375246
+ * response参考 https://bbs.csdn.net/topics/392412604?list=11074255
+ */
 @Component
 public class AuthFilter implements GlobalFilter {
 
@@ -42,6 +50,11 @@ public class AuthFilter implements GlobalFilter {
             throw new PermissionException("user not exist, please check");
         }
         ServerHttpRequest buildReuqest =  mutate.build();
+
+        // TODO 访问之后将新的token放入响应头中
+        //ServerHttpResponse response = exchange.getResponse();
+        //response.getHeaders().add("new_token","token_value");
+
         return chain.filter(exchange.mutate().request(buildReuqest).build());
     }
 
