@@ -1,22 +1,18 @@
 package spring.cloud.gateway.filter;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
-import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.server.PathContainer;
-import org.springframework.http.server.reactive.ReactorHttpHandlerAdapter;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
-import org.springframework.web.server.adapter.HttpWebHandlerAdapter;
 import reactor.core.publisher.Mono;
 import spring.cloud.gateway.common.JwtUtil;
 import spring.cloud.gateway.exception.PermissionException;
@@ -30,52 +26,58 @@ public class AuthFilter implements GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        ServerHttpRequest request = exchange.getRequest();
+        HttpHeaders header = request.getHeaders();
+        HttpMethod method = request.getMethod();
+        String token = header.getFirst(JwtUtil.HEADER_AUTH);
+        String userId = header.getFirst(JwtUtil.HEADER_USERID);
+        PathContainer pathContainer = request.getPath().pathWithinApplication();
+        String path = pathContainer.value();
+
+        //2- 处理登录请求
+        if (StringUtils.isBlank(token)) {
+            //是登录接口则放行，否则返回异常
+            if (path.contains(JwtUtil.LOGIN_URL) && HttpMethod.POST.equals(method)) {
+                throw new PermissionException("please login");
+            }
+            return chain.filter(exchange);
+        }
+
+        //3- 处理刷新token请求
+        if (path.indexOf("refresh") >= 0) {
+            //放行去掉刷新接口（在刷新前校验userId和token是否匹配）
+            return chain.filter(exchange);
+        }
+
+        //4- 处理刷新token请求
+        if (path.contains(JwtUtil.LOGOUT_URL) && HttpMethod.DELETE.equals(method)) {
+            //放行去掉登出接口（在刷新前校验userId和token是否匹配）
+            return chain.filter(exchange);
+        }
+
+        //5- 携带token请求其他业务接口
+        Map<String, String> validateResultMap = JwtUtil.validateTokenAndUser(token, userId);
+        if (validateResultMap == null || validateResultMap.isEmpty()) {
+            throw new PermissionException("token 已经失效");
+        }
+        // TODO 将用户信息存放在请求header中传递给下游业务
         Route gatewayUrl = exchange.getRequiredAttribute(ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR);
         URI uri = gatewayUrl.getUri();
-        ServerHttpRequest request = (ServerHttpRequest)exchange.getRequest();
-        HttpHeaders header = request.getHeaders();
-        String token = header.getFirst(JwtUtil.HEADER_AUTH);
+        //表示下游请求对应的服务名如 SPRING-CLOUD-SERVICE  SPRING-CLOUD-GATEWAY
+        String serviceName = uri.getHost();
 
-        // TODO 没有携带token的则判断URL，若是访问登录接口则放行，其他的则返回错误码，提示登录
-        passLogin(request, token);
-
-        Map<String,String> userMap = JwtUtil.validateToken(token);
         ServerHttpRequest.Builder mutate = request.mutate();
-        if(userMap.get("user").equals("admin") || userMap.get("user").equals("spring") || userMap.get("user").equals("cloud")) {
-            mutate.header("x-user-id", userMap.get("id"));
-            mutate.header("x-user-name", userMap.get("user"));
-            //x-user-serviceName 表示下游请求对应的服务名如 SPRING-CLOUD-SERVICE  SPRING-CLOUD-GATEWAY
-            mutate.header("x-user-serviceName", uri.getHost());
-        }else {
-            throw new PermissionException("user not exist, please check");
-        }
-        ServerHttpRequest buildReuqest =  mutate.build();
+        mutate.header("x-user-id", validateResultMap.get("userid"));
+        mutate.header("x-user-name", validateResultMap.get("user"));
+        mutate.header("x-user-serviceName", serviceName);
+        ServerHttpRequest buildReuqest = mutate.build();
 
-        // TODO 访问之后将新的token放入响应头中
+        //todo 如果响应中需要放数据，也可以放在response的header中
         //ServerHttpResponse response = exchange.getResponse();
         //response.getHeaders().add("new_token","token_value");
-
         return chain.filter(exchange.mutate().request(buildReuqest).build());
     }
 
-    /**
-     * 对于没有携带token的，且是访问登录接口的请求，不做认证，直接执行登录操作
-     * @param request
-     * @param token
-     */
-    private void passLogin(ServerHttpRequest request, String token) {
-        if (StringUtils.isBlank(token)) {
-            PathContainer pathContainer = request.getPath().pathWithinApplication();
-            String value = pathContainer.value();
-            List<PathContainer.Element> elements = pathContainer.elements();
-            int getToken = value.indexOf("getToken");
-            //若是访问登录接口则放行
-            if (getToken > 0) {
-                int end = value.lastIndexOf("/");
-                String name = value.substring(getToken + "getToken".length() + 1, end);
-                String admin = JwtUtil.generateToken(name, "123");
-                throw new PermissionException("please login to get the token:" + admin);
-            }
-        }
-    }
+
+
 }

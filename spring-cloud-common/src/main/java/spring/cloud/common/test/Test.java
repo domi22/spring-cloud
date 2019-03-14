@@ -17,11 +17,11 @@ public class Test {
 
     public static void main(String[] args) throws Exception {
         //测试token的失效时间
-        User user = new User();
-        User cloneUser = (User)user.clone();
-        String[] name1 = {"1","2","3","4"};
-        String[] name2 = new String[8];
-        System.arraycopy(name1,1,name2,2,3);
+//        User user = new User();
+//        User cloneUser = (User)user.clone();
+//        String[] name1 = {"1","2","3","4"};
+//        String[] name2 = new String[8];
+//        System.arraycopy(name1,1,name2,2,3);
 //        String old = generateToken("zhangsan", 1);
 //        Map<String, String> stringStringMap = validateToken(old);
         String new2 = generateToken("zhangsan", -1);

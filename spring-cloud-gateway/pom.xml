@@ -78,6 +78,12 @@
             <artifactId>fastjson</artifactId>
             <version>${fast.json}</version>
         </dependency>
+        <!-- apach工具包 -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${apach.commons}</version>
+        </dependency>
     </dependencies>
 
     <build>
