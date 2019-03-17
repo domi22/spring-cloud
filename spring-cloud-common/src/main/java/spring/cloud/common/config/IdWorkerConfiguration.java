@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -30,10 +31,33 @@ import java.net.UnknownHostException;
 @Configuration
 public class IdWorkerConfiguration {
     Logger logger = LogManager.getLogger();
+
+    @Value("${id.work:workId}")
+    private String workId;
+    @Value("${id.dateSource:dateSource}")
+    private String dateSource;
     @Bean
     @Primary
     public SnowflakeIdWorker idWorker(){
-        return new SnowflakeIdWorker(getWorkId(),getDataCenterId());
+        return new SnowflakeIdWorker(getWorkFromConfig(),getDateFromConfig());
+    }
+
+    private Long getWorkFromConfig() {
+        if ("workId".equals(workId)) {
+            return getWorkId();
+        } else {
+            //将workId转换为Long
+            return 2L;
+        }
+    }
+
+    private Long getDateFromConfig() {
+        if ("dateSource".equals(dateSource)) {
+            return getDataCenterId();
+        } else {
+            //将workId转换为Long
+            return 2L;
+        }
     }
 
     private Long getWorkId(){
