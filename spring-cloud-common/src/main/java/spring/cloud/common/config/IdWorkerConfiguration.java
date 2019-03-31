@@ -32,9 +32,9 @@ import java.net.UnknownHostException;
 public class IdWorkerConfiguration {
     Logger logger = LogManager.getLogger();
 
-    @Value("${id.work:workId}")
+    @Value("${id.work:noWorkId}")
     private String workId;
-    @Value("${id.dateSource:dateSource}")
+    @Value("${id.dateSource:noDateSource}")
     private String dateSource;
     @Bean
     @Primary
@@ -43,7 +43,7 @@ public class IdWorkerConfiguration {
     }
 
     private Long getWorkFromConfig() {
-        if ("workId".equals(workId)) {
+        if ("noWorkId".equals(workId)) {
             return getWorkId();
         } else {
             //将workId转换为Long
@@ -52,7 +52,7 @@ public class IdWorkerConfiguration {
     }
 
     private Long getDateFromConfig() {
-        if ("dateSource".equals(dateSource)) {
+        if ("noDateSource".equals(dateSource)) {
             return getDataCenterId();
         } else {
             //将workId转换为Long

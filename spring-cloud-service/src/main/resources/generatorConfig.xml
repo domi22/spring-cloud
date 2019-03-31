@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<!--详细使用文档请参见：https://blog.csdn.net/u014365133/article/details/78884751-->
+<generatorConfiguration>
+    <!--导入属性配置 (0个或1个)-->
+    <properties resource="datasource.properties"/>
+
+    <!--指定特定数据库的jdbc驱动jar包的位置 (0个或多个)-->
+    <!-- classPathEntry只在下面这两种情况下才有效：-->
+    <!-- 1- 当加载 JDBC 驱动内省数据库时 -->
+    <!-- 2- 当加载根类中的 JavaModelGenerator 检查重写的方法时 -->
+    <!-- 如果你需要加载其他用途的jar包，classPathEntry起不到作用 -->
+    <classPathEntry location="${db.driverLocation}"/>
+
+
+    <!--context 指定生成一组对象的环境 (1个或多个)-->
+
+    <!--targetRuntime: 此属性用于指定生成的代码的运行时环境。该属性支持以下可选值：(一般情况下使用默认值即可，有关这些值的具体作用以及区别请查看中文文档的详细内容。)-->
+    <!--MyBatis3- 这是默认值 -->
+    <!--MyBatis3Simple- 不生成和Example查询有关的内容，避免在后面的<table>中逐个进行配置 -->
+    <!--Ibatis2Java2-->
+    <!--Ibatis2Java5-->
+
+    <!--defaultModelType: 可选参数，定义了MBG如何生成**实体类**  -->
+    <!--conditional- 如果一个表的主键只有一个字段,那么不会为该字段生成单独的实体类,会将该字段合并到基本实体类中。*-->
+    <!--flat- 每一张表只生成一个实体类。这个实体类包含表中的所有字段。**这种模型最简单，推荐使用-->
+    <!--hierarchical- 如果表有主键,那么该模型会产生一个单独的主键实体类,如果表还有BLOB字段， 则会为表生成一个包含所有BLOB字段的单独的实体类,然后为所有其他的字段生成一个单独的实体类。 MBG会在所有生成的实体类之间维护一个继承关系-->
+
+    <!--introspectedColumnImpl 扩展类，指定完全限定名即可实现自定义扩展 https://www.jianshu.com/p/b6d981b25409-->
+    <context id="default" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!--!!!! context 的以下子元素有严格的顺序要求!!!!!!-->
+
+        <!--当表名或者字段名为SQL关键字的时候，可以设置该属性为true，MBG会自动给表名或字段名添加``符-->
+        <property name = "autoDelimitKedywords" value="true"/>
+        <property name = "beginningDelimiter" value="`"/>
+        <property name = "endingDelimiter" value="`"/>
+        <!-- Java文件的编码 + 格式化java + 格式化XML -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!--<plugin></plugin>-->
+
+        <!-- optional，旨在创建class时，对注释进行控制，可以自定义一个扩展类 -->
+        <commentGenerator type="spring.cloud.service.config.MyCommentGenerator">
+            <!--阻止**生成的注释包含时间戳-->
+            <property name="suppressDate" value="true"/>
+            <!--阻止**生成注释-->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--jdbc的数据库连接 -->
+        <jdbcConnection
+                driverClass="${db.driverClassName}"
+                connectionURL="${db.url}"
+                userId="${db.username}"
+                password="${db.password}">
+        </jdbcConnection>
+
+
+        <!-- 非必需，该属性可以控制是否强制DECIMAL和NUMERIC类型的字段转换为Java类型的java.math.BigDecimal,默认值为false:
+        默认情况下的转换规则为：
+        如果精度>0或者长度>18，就会使用java.math.BigDecimal
+        如果精度=0并且10<=长度<=18，就会使用java.lang.Long
+        如果精度=0并且5<=长度<=9，就会使用java.lang.Integer
+        如果精度=0并且长度<5，就会使用java.lang.Short
+
+        如果设置为true，那么一定会使用java.math.BigDecimal
+        -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--
+        Model模型生成器,用来生成含有主键key的类，记录类 以及查询Example类
+        targetPackage- 指定生成的model生成所在的包名
+        targetProject- 指定在该项目下所在的路径
+        添加 <property name="trimStrings" value="false"/>，可以对CHAR类型的列做trim操作
+        enableSubPackages- 属性可以将pojo分子包放置
+        immutable- 生成的pojo是否可变？（没有setter方法）
+        -->
+        <javaModelGenerator targetPackage="spring.cloud.service.pojo" targetProject="src/main/java"/>
+
+        <!--mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
+        <sqlMapGenerator targetPackage="mappers" targetProject="./src/main/resources"/>
+
+        <!--
+        客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码
+        type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+        type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+        type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+        -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="spring.cloud.service.dao" targetProject="src/main/java"/>
+
+        <table tableName="test_date" domainObjectName="TestDate" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+            <!--在insert语句中，返回自增主键-->
+            <generatedKey column="id" sqlStatement="Mysql"/>
+        </table>
+    </context>
+</generatorConfiguration>

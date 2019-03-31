@@ -1,5 +1,7 @@
 package spring.cloud.common.vo;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,8 +11,11 @@ public class User implements Serializable,Cloneable {
 
     public final static String CONTEXT_KEY_USERID = "x-user-id";
 
+
+    @NotNull(message = "名字id不能为空")
     private String userId;
 
+    @NotBlank(message = "名字NAME不能为空")
     private String userName;
 
     private List<String> allowPermissionService;

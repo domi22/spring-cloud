@@ -68,6 +68,7 @@
         <result property="allocationDesc" column="lallocation_desc"/>
     </resultMap>
 
+
     <select id="queryInfos" resultMap="allInfo">
         select
         <include refid="allColumn"/>
