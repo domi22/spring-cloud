@@ -19,6 +19,7 @@
         <module>spring-cloud-ribbon</module>
         <module>spring-cloud-hystrix</module>
         <module>spring-cloud-common</module>
+        <module>spring-cloud-redis</module>
     </modules>
 
   <parent>

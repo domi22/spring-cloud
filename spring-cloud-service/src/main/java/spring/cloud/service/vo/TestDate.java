@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class TestDate implements Serializable {
+public class TestDate implements Serializable,Cloneable {
 
     private static final long serialVersionUID = -5952407619974202299L;
 
@@ -21,6 +21,16 @@ public class TestDate implements Serializable {
     //@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8") //后台到前台
     private Timestamp end;
+
+    private Card card;
+
+    public Card getCard() {
+        return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
 
     public Long getId() {
         return id;
@@ -52,6 +62,13 @@ public class TestDate implements Serializable {
 
     public void setEnd(Timestamp end) {
         this.end = end;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException{
+        TestDate testDate = (TestDate)super.clone();
+        testDate.setCard((Card)getCard().clone());
+        return testDate;
     }
 
 

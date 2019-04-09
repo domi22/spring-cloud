@@ -6,6 +6,7 @@
     <file type="web" url="file://$PROJECT_DIR$/spring-cloud-eureka" />
     <file type="web" url="file://$PROJECT_DIR$/spring-cloud-feign" />
     <file type="web" url="file://$PROJECT_DIR$/spring-cloud-gateway" />
+    <file type="web" url="file://$PROJECT_DIR$/spring-cloud-redis" />
     <file type="web" url="file://$PROJECT_DIR$/spring-cloud-service" />
   </component>
   <component name="MavenProjectsManager">

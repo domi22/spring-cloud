@@ -12,6 +12,7 @@
         <module name="spring-cloud-feign" />
         <module name="spring-cloud-gateway" />
         <module name="spring-cloud-hystrix" />
+        <module name="spring-cloud-redis" />
         <module name="spring-cloud-ribbon" />
         <module name="spring-cloud-service" />
         <module name="spring-cloud-zuul" />
