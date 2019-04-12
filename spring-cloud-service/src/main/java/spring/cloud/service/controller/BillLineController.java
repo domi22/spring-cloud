@@ -4,9 +4,12 @@ import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 //import spring.cloud.common.context.UserInfoContext;
 //import spring.cloud.common.util.ResultInfo;
@@ -31,6 +34,9 @@ public class BillLineController extends BaseController {
     @Autowired
     TestDateMapper testDateMapper;
 
+    @Autowired
+    RestTemplate restTemplate;
+
 
 //    @ApiOperation(value="获取用户列表value", notes="获取用户列表notes")
 //    @GetMapping("/bills")
@@ -44,10 +50,10 @@ public class BillLineController extends BaseController {
 ////        return CollectionUtils.isEmpty(refundBillLines) ? "" : JSON.toJSONString(refundBillLines);
 //    }
 
-//    @PostMapping(value = "/upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-//    public String uploadFile(MultipartFile file){
-//        return file.getOriginalFilename();
-//    }
+    @PostMapping(value = "/upload",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String uploadFile(MultipartFile file){
+        return file.getOriginalFilename();
+    }
 
 
 
