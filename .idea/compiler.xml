@@ -6,17 +6,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spring-boot-redis" />
+        <module name="spring-boot-common-function" />
         <module name="spring-cloud-common" />
-        <module name="spring-cloud-config" />
         <module name="spring-cloud-eureka" />
         <module name="spring-cloud-feign" />
         <module name="spring-cloud-gateway" />
-        <module name="spring-cloud-hystrix" />
-        <module name="spring-cloud-ribbon" />
         <module name="spring-cloud-service" />
         <module name="spring-cloud-zuul" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="spring-boot-redis" target="1.8" />
+      <module name="spring-cloud-config" target="1.8" />
+      <module name="spring-cloud-hystrix" target="1.8" />
+      <module name="spring-cloud-ribbon" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
