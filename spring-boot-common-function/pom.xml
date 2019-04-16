@@ -57,7 +57,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-
+        <dependency><!-- 4.引入email API-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
         <!--==================== springboot2.0 - mysql - HikariCP连接池(默认) ========================-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -108,6 +111,12 @@
             <groupId>org.projectreactor</groupId>
             <artifactId>reactor-spring</artifactId>
             <version>1.0.1.RELEASE</version>
+        </dependency>
+        <!-- ftp工具 -->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.3</version>
         </dependency>
 
     </dependencies>

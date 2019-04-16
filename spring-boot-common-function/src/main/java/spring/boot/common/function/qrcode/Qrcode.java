@@ -1,6 +1,7 @@
-package com.swetake.util;
+package spring.boot.common.function.qrcode;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 
 /**
  * QRcode class library 0.50beta10<BR>

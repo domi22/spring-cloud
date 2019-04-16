@@ -1,4 +1,4 @@
-package com.swetake.util;
+package spring.boot.common.function.qrcode;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.AsyncRestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -36,6 +38,7 @@ public class HttpClientController {
     @RequestMapping("/syn")
     @ResponseBody
     public String async(){
+//        WebClient we = new webClient();
         ConcurrentHashMap map = new ConcurrentHashMap(2);
         //建议使用 WebClient高性能异步API替换传统的resttemplate
         AsyncRestTemplate template = new AsyncRestTemplate();
