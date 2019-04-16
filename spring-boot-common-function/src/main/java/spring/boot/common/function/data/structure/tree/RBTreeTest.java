@@ -1,4 +1,4 @@
-package spring.boot.common.function.main.data.structure;
+package spring.boot.common.function.data.structure.tree;
 
 /**
  * Java 语言: 二叉查找树

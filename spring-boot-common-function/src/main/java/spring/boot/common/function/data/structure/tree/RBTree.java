@@ -1,4 +1,4 @@
-package spring.boot.common.function.main.data.structure;
+package spring.boot.common.function.data.structure.tree;
 
 public class RBTree<T extends Comparable<T>> {
     private Node<T> root;
