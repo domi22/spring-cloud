@@ -68,7 +68,7 @@ public class BusinessFuncAspect {
      * @return
      * @throws Exception
      */
-    @Around(value="@annotation(com.test.domi.annotation.BusinessFuc)")
+    @Around(value="@annotation(spring.boot.common.function.annotation.BusinessFuc)")
     @Transactional(rollbackFor = Throwable.class)
     public Object businessFunc(ProceedingJoinPoint joinPoint) throws Throwable{
        //获取注解中的Func分组

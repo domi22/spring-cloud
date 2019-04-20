@@ -1,9 +1,8 @@
 package spring.boot.common.function.threadpool;
 
-import com.test.domi.task.FileLoadTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import spring.boot.common.function.threadpool.task.FileLoadTask;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 

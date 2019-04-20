@@ -1,8 +1,7 @@
 package spring.boot.common.function.annotation.validate;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import spring.boot.common.function.annotation.WordMaxLength;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.io.UnsupportedEncodingException;
@@ -10,7 +9,6 @@ import java.io.UnsupportedEncodingException;
 public class WordMaxLengthValidator implements ConstraintValidator<WordMaxLength,String> {
 
     int length;
-
 
     @Override
     public void initialize(WordMaxLength wordMaxLength) {

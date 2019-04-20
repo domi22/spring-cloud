@@ -1,8 +1,6 @@
 package spring.boot.common.function.annotation;
 
-import com.test.domi.validate.TimeBetweenMaxValidator;
 import spring.boot.common.function.annotation.validate.TimeBetweenMaxValidator;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;

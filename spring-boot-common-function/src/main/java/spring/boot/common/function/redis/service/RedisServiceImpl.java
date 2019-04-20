@@ -60,7 +60,6 @@ public class RedisServiceImpl implements RedisService {
         person.setNum(new BigDecimal(11.456));
         person.setUadteTime(new Date());
         rname.set(person);
-        //此时取出来的person是一个字符串的形式
         Person person1 = rname.get();
         String name1 = person1.getName();
         Date uadteTime = person.getUadteTime();

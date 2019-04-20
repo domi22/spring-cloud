@@ -1,8 +1,6 @@
 package spring.boot.common.function.annotation;
 
-import com.test.domi.validate.WordMaxLengthValidator;
 import spring.boot.common.function.annotation.validate.WordMaxLengthValidator;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;

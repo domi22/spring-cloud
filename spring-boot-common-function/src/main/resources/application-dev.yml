@@ -27,4 +27,25 @@ spring:
     default-encoding: utf-8
     from: ppyun7c@163.com #与上面的username保持一致
 
-
+#===================================线程池1配置[开始]==================================================
+#1- 核心池大小 corePoolSize = taskTimeSeconds * tasksParSecond = 10
+#2- 最大线程数
+    #cpu密集型 maxPoolSize = (Ncpu + 1);
+    #io密集型 maxPoolSize = Ncpu * uCPU * (1 + taskWaitTimeSeconds / taskTimeSeconds)
+    #最终计算 maxPoolSize < corePoolSize ? corePoolSize : maxPoolSize  = 10
+#3- 最大队列数 queueSize = corePoolSize / taskTimeSeconds * taskResponseTimeSeconds = 2
+#4- 时间 0-毫秒 1/2/3- 秒 4-分 5-时 6-日
+#5- 队列 0-有界ArrayBlockingQueue    1-无界LinkedBlockingQueue   2-同步移交SynchronousQueue
+#6- 拒绝 0-log后抛异常  1-丢弃不抛异常   2-丢弃最旧不抛异常   3-由提交者执行
+executor:
+  maxAbortQueueSize: 10000
+  poolNamePre: cpu-task
+  taskTimeSeconds: 0.1
+  tasksParSecond: 100
+  taskWaitTimeSeconds: 0.01
+  uCPU: 0.8
+  taskResponseTimeSeconds: 0.02
+  keepAliveTime: 60
+  rejectedType: 0
+  queueType: 0
+  unitType: 0

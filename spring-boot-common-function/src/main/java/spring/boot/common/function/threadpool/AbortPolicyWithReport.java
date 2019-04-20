@@ -1,7 +1,6 @@
 package spring.boot.common.function.threadpool;
 
 import com.alibaba.fastjson.JSON;
-
 import java.util.Random;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;

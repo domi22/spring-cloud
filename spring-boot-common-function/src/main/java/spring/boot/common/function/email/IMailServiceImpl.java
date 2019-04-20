@@ -8,7 +8,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
-import javax.mail.internet.MimeMessage;
 import java.io.File;
 
 @Component
@@ -44,14 +43,14 @@ public class IMailServiceImpl implements IMailService {
      */
     @Override
     public void sendHtmlMail(String to, String subject, String content, String... cc) throws MessagingException{
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom(from);
-        helper.setTo(to);
-        helper.setCc(cc);
-        helper.setSubject(subject);
-        helper.setText(content, true);
-        mailSender.send(message);
+//        MimeMessage message = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+//        helper.setFrom(from);
+//        helper.setTo(to);
+//        helper.setCc(cc);
+//        helper.setSubject(subject);
+//        helper.setText(content, true);
+//        mailSender.send(message);
     }
 
 
@@ -65,17 +64,17 @@ public class IMailServiceImpl implements IMailService {
      */
     @Override
     public void sendAttachmentsMail(String to, String subject, String content, String filePath, String... cc)throws MessagingException {
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom(from);
-        helper.setTo(to);
-        helper.setCc(cc);
-        helper.setSubject(subject);
-        helper.setText(content, true);
-        FileSystemResource file = new FileSystemResource(new File(filePath));
-        String fileName = filePath.substring(filePath.lastIndexOf(File.separator));
-        helper.addAttachment(fileName, file);
-        mailSender.send(message);
+//        MimeMessage message = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+//        helper.setFrom(from);
+//        helper.setTo(to);
+//        helper.setCc(cc);
+//        helper.setSubject(subject);
+//        helper.setText(content, true);
+//        FileSystemResource file = new FileSystemResource(new File(filePath));
+//        String fileName = filePath.substring(filePath.lastIndexOf(File.separator));
+//        helper.addAttachment(fileName, file);
+//        mailSender.send(message);
     }
 
     /**
@@ -88,15 +87,15 @@ public class IMailServiceImpl implements IMailService {
      */
     @Override
     public void sendResourceMail(String to, String subject, String content, String rscPath, String rscId, String... cc) throws MessagingException {
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        helper.setFrom(from);
-        helper.setTo(to);
-        helper.setCc(cc);
-        helper.setSubject(subject);
-        helper.setText(content, true);
-        FileSystemResource res = new FileSystemResource(new File(rscPath));
-        helper.addInline(rscId, res);
-        mailSender.send(message);
+//        MimeMessage message = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+//        helper.setFrom(from);
+//        helper.setTo(to);
+//        helper.setCc(cc);
+//        helper.setSubject(subject);
+//        helper.setText(content, true);
+//        FileSystemResource res = new FileSystemResource(new File(rscPath));
+//        helper.addInline(rscId, res);
+//        mailSender.send(message);
     }
 }

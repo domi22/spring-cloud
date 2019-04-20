@@ -1,7 +1,5 @@
 package spring.boot.common.function.attachment;
 
-import com.test.domi.validate.FileValidator;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;
