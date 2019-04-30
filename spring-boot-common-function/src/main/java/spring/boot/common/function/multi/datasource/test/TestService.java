@@ -26,6 +26,7 @@ public class TestService {
         dataSourceMapper.addShangp("增加A元");
         String nameA = dataSourceMapper.getName();
         //切换数据源B
+
         String nameB = serviceB.serverBTx(user1slave, user1slaveC);
         return nameA + nameB;
     }
