@@ -14,7 +14,7 @@ import java.util.concurrent.*;
  * spring5请关注响应式编程 webflux等等
  */
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/test222")
 public class CallableController {
 
     /**
