@@ -1,0 +1,7 @@
+eureka:
+  instance:
+    prefer-ip-address: true  #将自己的ip注册到eureka上
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8881/eureka/  #与注册中心交互的地址，多个逗号隔开
+    #backup-registry-impl: 启动时候找不到服务，则使用该配置的自定义服务 com.example.BackupServiceRegistry

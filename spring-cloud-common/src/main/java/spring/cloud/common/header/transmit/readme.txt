@@ -1,0 +1,1 @@
+1- restTemplate的header透传时，拦截器需要add到template里面，参见 RestTemplateConfig

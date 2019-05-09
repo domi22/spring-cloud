@@ -1,0 +1,4 @@
+1- 关于protobuf-maven-plugin 详细信息
+https://www.xolstice.org/protobuf-maven-plugin/compile-mojo.html
+
+2-

@@ -6,14 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import spring.cloud.common.annotation.EnableUserInfoTransmitter;
 //import spring.cloud.common.annotation.EnableUserInfoTransmitter;
 
 
 //@MapperScan({"spring.cloud.service.mapper","spring.cloud.service.dao"})
 @MapperScan("spring.cloud.service.dao")
 @EnableEurekaClient
-@EnableUserInfoTransmitter
 @SpringBootApplication(scanBasePackages={"spring.cloud.*"})
 public class SpringCloudServiceApp extends SpringBootServletInitializer {
 

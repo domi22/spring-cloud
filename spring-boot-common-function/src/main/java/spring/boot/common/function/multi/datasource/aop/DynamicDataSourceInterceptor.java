@@ -27,8 +27,7 @@ public class DynamicDataSourceInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         DynamicDataSourceContextHolder.finalRemove();
-        //清除用户请求头信息
-        //清除用户数据源信息
+        //清除用户请求头信息 && 清除用户数据源信息
         //如果这里抛异常，会请求/error路劲，preHandle还会执行一次。
     }
 

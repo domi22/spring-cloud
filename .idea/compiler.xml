@@ -11,6 +11,9 @@
         <module name="spring-cloud-eureka" />
         <module name="spring-cloud-feign" />
         <module name="spring-cloud-gateway" />
+        <module name="spring-cloud-grpc-client" />
+        <module name="spring-cloud-grpc-lib" />
+        <module name="spring-cloud-grpc-server" />
         <module name="spring-cloud-service" />
         <module name="spring-cloud-zuul" />
       </profile>

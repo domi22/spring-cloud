@@ -1,0 +1,60 @@
+package spring.cloud.common.auth;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import spring.cloud.common.header.transmit.UserContextHolder;
+import spring.cloud.common.vo.User;
+
+public class UserContextInterceptor extends HandlerInterceptorAdapter {
+
+    private static final Logger log = LoggerFactory.getLogger(UserContextInterceptor.class);
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse respone, Object arg2) throws Exception {
+        User user = getUser(request);
+        // TODO 日常测试先关闭服务间的资源权限校验
+//        UserPermissionUtil.permission(user);
+//        if(!UserPermissionUtil.verify(user,request)) {
+//            respone.setHeader("Content-Type", "application/json");
+//            String jsonstr = JSON.toJSONString("no permisson access service, please check");
+//            respone.getWriter().write(jsonstr);
+//            respone.getWriter().flush();
+//            respone.getWriter().close();
+//            throw new PermissionException("no permisson access service, please check");
+//        }
+        UserContextHolder.set(user);
+        return true;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse respone, Object arg2, ModelAndView arg3)
+            throws Exception {
+        // DOING NOTHING
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse respone, Object arg2, Exception arg3)
+            throws Exception {
+        UserContextHolder.remove();
+    }
+
+    private User getUser(HttpServletRequest request){
+        String userid = request.getHeader("x-user-id");
+        String username = request.getHeader("x-user-name");
+        User user = new User();
+        user.setUserId(userid);
+        user.setUserName(username);
+        return user;
+    }
+
+    static class PermissionException extends RuntimeException {
+        private static final long serialVersionUID = 1L;
+        public PermissionException(String msg) {
+            super(msg);
+        }
+    }
+}

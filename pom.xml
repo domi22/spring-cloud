@@ -17,6 +17,9 @@
         <module>spring-cloud-gateway</module>
         <module>spring-cloud-common</module>
         <module>spring-boot-common-function</module>
+        <module>spring-cloud-grpc-lib</module>
+        <module>spring-cloud-grpc-server</module>
+        <module>spring-cloud-grpc-client</module>
     </modules>
 
   <parent>
