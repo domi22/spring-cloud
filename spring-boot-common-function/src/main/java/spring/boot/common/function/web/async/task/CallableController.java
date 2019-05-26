@@ -48,7 +48,7 @@ public class CallableController {
 
     /**
      * spring 3.2 + Servlet3.0
-     * 如果我们需要超时处理的回调或者错误处理的回调，我们可以使用WebAsyncTask代替Callable
+     * 如果我们需要超时处理的回调或者错误处理的回调，我们可以使用WebAsyncTask代替Callable，可以设置执行超时时间
      */
     @GetMapping("/webtask")
     public WebAsyncTask<String> getWebAsyncTask() {

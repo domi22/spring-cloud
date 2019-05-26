@@ -23,7 +23,7 @@ public class DynamicDataSourceContextHolder {
     public static List<String> dataSourceIds = new ArrayList<>();
 
     /**
-     * 线程级别的私有变量
+     * 线程级别的私有变量  todo 用栈结构代理list
      */
     private static final ThreadLocal<List<String>> SOURCE = new ThreadLocal<>();
 

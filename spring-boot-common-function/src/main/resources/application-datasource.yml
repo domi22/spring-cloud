@@ -1,0 +1,80 @@
+spring:
+  datasource:
+    default:
+      url: jdbc:mysql://localhost:3306/ebuy?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver  #  new cj
+      username: root
+      password: root55
+      type: com.zaxxer.hikari.HikariDataSource
+      hikari:
+        minimum-idle: 3    #池中维护的最小空闲连接数 -默认-1 配置validate -10  -minIdle<0或者minIdle>maxPoolSize,则被重置为maxPoolSize
+        auto-commit: true  #自动提交从池中返回的连接 默认true
+        idle-timeout: 10000  #连接允许在池中闲置的最长时间 -默认600000ms -如果idleTimeout+1秒>maxLifetime 且 maxLifetime>0，则会被重置为0（代表永远不会退出）；如果idleTimeout!=0且小于10秒，则会被重置为10秒
+        pool-name: DatebookHikariCP    #连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中以识别池和池配置
+        max-lifetime: 1800000  #池中连接最长生命周期 默认1800000ms  -如果不等于0且小于30秒则会被重置回30分钟
+        connection-timeout: 30000  #等待来自池的连接的最大毫秒数 默认30000ms -如果小于250毫秒，则被重置回30秒
+    cluster:
+    - key: user1master
+      url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver  #  new cj
+      username: root
+      password: root55
+      type: com.zaxxer.hikari.HikariDataSource
+      hikari:
+        minimum-idle: 3    #池中维护的最小空闲连接数 -默认-1 配置validate -10  -minIdle<0或者minIdle>maxPoolSize,则被重置为maxPoolSize
+        auto-commit: true  #自动提交从池中返回的连接 默认true
+        idle-timeout: 10000  #连接允许在池中闲置的最长时间 -默认600000ms -如果idleTimeout+1秒>maxLifetime 且 maxLifetime>0，则会被重置为0（代表永远不会退出）；如果idleTimeout!=0且小于10秒，则会被重置为10秒
+        pool-name: DatebookHikariCP    #连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中以识别池和池配置
+        max-lifetime: 1800000  #池中连接最长生命周期 默认1800000ms  -如果不等于0且小于30秒则会被重置回30分钟
+        connection-timeout: 30000  #等待来自池的连接的最大毫秒数 默认30000ms -如果小于250毫秒，则被重置回30秒
+    - key: user1slave
+      url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      driver-class-name: com.mysql.cj.jdbc.Driver  #  new cj
+      username: root
+      password: root55
+      type: com.zaxxer.hikari.HikariDataSource
+      hikari:
+        minimum-idle: 3    #池中维护的最小空闲连接数 -默认-1 配置validate -10  -minIdle<0或者minIdle>maxPoolSize,则被重置为maxPoolSize
+        auto-commit: true  #自动提交从池中返回的连接 默认true
+        idle-timeout: 10000  #连接允许在池中闲置的最长时间 -默认600000ms -如果idleTimeout+1秒>maxLifetime 且 maxLifetime>0，则会被重置为0（代表永远不会退出）；如果idleTimeout!=0且小于10秒，则会被重置为10秒
+        pool-name: DatebookHikariCP    #连接池的用户定义名称，主要出现在日志记录和JMX管理控制台中以识别池和池配置
+        max-lifetime: 1800000  #池中连接最长生命周期 默认1800000ms  -如果不等于0且小于30秒则会被重置回30分钟
+        connection-timeout: 30000  #等待来自池的连接的最大毫秒数 默认30000ms -如果小于250毫秒，则被重置回30秒
+
+  mail:
+    host: smtp.163.com #发送邮件服务器
+    username: ppyun7c@163.com #163邮箱
+    password: wdsqm01 #客户端授权码
+    protocol: smtp #发送邮件协议
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.port: 465 #端口号465或994
+    properties.mail.display.sendmail: XIEDONGXU #可以任意
+    properties.mail.display.sendname: Spring Boot Guide Email #可以任意
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    properties.mail.smtp.ssl.enable: true
+    default-encoding: utf-8
+    from: ppyun7c@163.com #与上面的username保持一致
+
+#===================================线程池1配置[开始]==================================================
+#1- 核心池大小 corePoolSize = taskTimeSeconds * tasksParSecond = 10
+#2- 最大线程数
+    #cpu密集型 maxPoolSize = (Ncpu + 1);
+    #io密集型 maxPoolSize = Ncpu * uCPU * (1 + taskWaitTimeSeconds / taskTimeSeconds)
+    #最终计算 maxPoolSize < corePoolSize ? corePoolSize : maxPoolSize  = 10
+#3- 最大队列数 queueSize = corePoolSize / taskTimeSeconds * taskResponseTimeSeconds = 2
+#4- 时间 0-毫秒 1/2/3- 秒 4-分 5-时 6-日
+#5- 队列 0-有界ArrayBlockingQueue    1-无界LinkedBlockingQueue   2-同步移交SynchronousQueue
+#6- 拒绝 0-log后抛异常  1-丢弃不抛异常   2-丢弃最旧不抛异常   3-由提交者执行
+executor:
+  maxAbortQueueSize: 10000
+  poolNamePre: cpu-task
+  taskTimeSeconds: 0.1
+  tasksParSecond: 100
+  taskWaitTimeSeconds: 0.01
+  uCPU: 0.8
+  taskResponseTimeSeconds: 0.02
+  keepAliveTime: 60
+  rejectedType: 0
+  queueType: 0
+  unitType: 0
