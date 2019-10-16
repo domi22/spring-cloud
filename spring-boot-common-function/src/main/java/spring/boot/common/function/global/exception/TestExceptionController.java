@@ -3,8 +3,8 @@ package spring.boot.common.function.global.exception;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import spring.boot.common.function.util.ResultInfo;
-import spring.boot.common.function.util.ResultUtil;
+import spring.cloud.common.transdto.ResultInfo;
+import spring.cloud.common.transdto.ResultUtil;
 
 import java.util.ArrayList;
 

@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-import spring.boot.common.function.util.ResultInfo;
+import spring.cloud.common.transdto.ResultInfo;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;

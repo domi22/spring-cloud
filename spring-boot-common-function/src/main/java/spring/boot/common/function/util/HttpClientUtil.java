@@ -4,7 +4,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;

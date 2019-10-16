@@ -21,6 +21,7 @@
     <bytecodeTargetLevel>
       <module name="spring-boot-redis" target="1.8" />
       <module name="spring-cloud-config" target="1.8" />
+      <module name="spring-cloud-framework" target="1.8" />
       <module name="spring-cloud-hystrix" target="1.8" />
       <module name="spring-cloud-ribbon" target="1.8" />
     </bytecodeTargetLevel>

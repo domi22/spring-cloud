@@ -1,13 +1,10 @@
 package spring.cloud.common.distributed.lock;
 
-import com.test.domi.common.utils.SpringContextUtil;
-import com.test.domi.service.impl.IMailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
+import spring.cloud.common.util.SpringContextUtil;
 import java.util.concurrent.ExecutorService;
 
 
@@ -16,8 +13,6 @@ import java.util.concurrent.ExecutorService;
 public class ZKController {
 
     @Autowired
-    private IMailServiceImpl iMailServiceImpl;
-    @Resource(name = "testpool")
     private ExecutorService exs;
 
     private int k = 1;

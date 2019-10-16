@@ -12,8 +12,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
-import spring.boot.common.function.util.ResultCode;
-import spring.boot.common.function.util.ResultInfo;
+import spring.cloud.common.transdto.ResultCode;
+import spring.cloud.common.transdto.ResultInfo;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;

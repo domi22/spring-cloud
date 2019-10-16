@@ -8,6 +8,13 @@
   <packaging>pom</packaging>
   <name>spring-cloud</name>
 
+  <parent>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-parent</artifactId>
+      <version>2.0.3.RELEASE</version>
+      <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
     <!-- 通常会加入一个common的子模块，用于常用功能的jar和版本的管理，供其他子模块使用 -->
     <modules>
         <module>spring-cloud-feign</module>
@@ -21,13 +28,6 @@
         <module>spring-cloud-grpc-server</module>
         <module>spring-cloud-grpc-client</module>
     </modules>
-
-  <parent>
-     <groupId>org.springframework.boot</groupId>
-     <artifactId>spring-boot-starter-parent</artifactId>
-     <version>2.0.3.RELEASE</version>
-     <relativePath/> <!-- lookup parent from repository -->
-  </parent>
 
   <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -94,6 +94,11 @@
             <dependency>
                 <groupId>spring.cloud.common</groupId>
                 <artifactId>spring-cloud-common</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>spring.cloud.common.function</groupId>
+                <artifactId>spring-cloud-common-function</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
 
