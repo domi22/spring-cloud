@@ -7,10 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import spring.cloud.common.header.transmit.UserContextHolder;
-import spring.cloud.common.vo.User;
+
 
 public class UserContextInterceptor extends HandlerInterceptorAdapter {
-
     private static final Logger log = LoggerFactory.getLogger(UserContextInterceptor.class);
 
     @Override

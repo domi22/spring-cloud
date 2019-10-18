@@ -1,6 +1,6 @@
 package spring.cloud.common.header.transmit;
 
-import spring.cloud.common.vo.User;
+import spring.cloud.common.auth.User;
 
 public class UserContextHolder {
     private static final ThreadLocal<User> CONTEXT = new ThreadLocal<>();
