@@ -1,4 +1,4 @@
-package spring.cloud.gateway.common;
+package spring.cloud.gateway.auth;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

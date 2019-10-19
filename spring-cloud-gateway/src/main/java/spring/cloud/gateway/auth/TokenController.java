@@ -1,7 +1,6 @@
-package spring.cloud.gateway.controller;
+package spring.cloud.gateway.auth;
 
 import org.springframework.web.bind.annotation.*;
-import spring.cloud.gateway.common.JwtUtil;
 
 import java.util.Map;
 

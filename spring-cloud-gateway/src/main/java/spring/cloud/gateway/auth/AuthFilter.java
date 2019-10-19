@@ -1,4 +1,4 @@
-package spring.cloud.gateway.filter;
+package spring.cloud.gateway.auth;
 
 import java.net.URI;
 import java.util.Map;
@@ -14,8 +14,6 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-import spring.cloud.gateway.common.JwtUtil;
-import spring.cloud.gateway.exception.PermissionException;
 
 /**
  * 参数参考 https://blog.csdn.net/tianyaleixiaowu/article/details/83375246

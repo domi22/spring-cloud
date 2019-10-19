@@ -1,13 +1,13 @@
-package spring.cloud.gateway.controller;
+package spring.cloud.gateway.dynamic.route;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
 import org.springframework.cloud.gateway.route.RouteDefinition;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import spring.cloud.gateway.model.GatewayPredicateDefinition;
-import spring.cloud.gateway.model.GatewayRouteDefinition;
-import spring.cloud.gateway.service.impl.DynamicRouteServiceImpl;
+import spring.cloud.gateway.dynamic.route.model.GatewayPredicateDefinition;
+import spring.cloud.gateway.dynamic.route.model.GatewayRouteDefinition;
+import spring.cloud.gateway.dynamic.route.DynamicRouteServiceImpl;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;

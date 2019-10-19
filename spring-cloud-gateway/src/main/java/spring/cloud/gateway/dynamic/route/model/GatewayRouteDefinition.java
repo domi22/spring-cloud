@@ -1,4 +1,4 @@
-package spring.cloud.gateway.model;
+package spring.cloud.gateway.dynamic.route.model;
 
 import java.util.ArrayList;
 import java.util.List;

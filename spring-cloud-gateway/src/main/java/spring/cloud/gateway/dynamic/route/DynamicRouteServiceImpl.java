@@ -1,4 +1,4 @@
-package spring.cloud.gateway.service.impl;
+package spring.cloud.gateway.dynamic.route;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
@@ -8,15 +8,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
-import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
-import spring.cloud.gateway.model.GatewayPredicateDefinition;
-import spring.cloud.gateway.model.GatewayRouteDefinition;
-import com.alibaba.fastjson.JSON;
-import java.util.HashMap;
-import java.util.Arrays;
-import java.util.Map;
-import java.net.URI;
 
 @Service
 public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware {

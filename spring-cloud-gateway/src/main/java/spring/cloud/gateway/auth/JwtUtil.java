@@ -1,4 +1,4 @@
-package spring.cloud.gateway.common;
+package spring.cloud.gateway.auth;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
