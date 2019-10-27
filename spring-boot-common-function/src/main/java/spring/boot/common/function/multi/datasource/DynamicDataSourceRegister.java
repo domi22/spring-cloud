@@ -79,6 +79,17 @@ public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar,
         Class<? extends DataSource> clazz = getDataSourceType(typeStr);
         // 绑定默认数据源参数 也就是主数据源
         DataSource consumerDatasource, defaultDatasource = bind(clazz, defauleDataSourceProperties);
+
+        /* SPRINGBOOT 2.0.0下的版本可以用这种方式实例化数据源
+        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+        dataSourceBuilder.driverClassName("org.h2.Driver");
+        dataSourceBuilder.url("jdbc:h2:mem:test");
+        dataSourceBuilder.username("SA");
+        dataSourceBuilder.password("");
+        DataSource build = dataSourceBuilder.build();
+        */
+
+
         DynamicDataSourceContextHolder.dataSourceIds.add(DEFAULT);
         logger.info("注册默认数据源成功");
         //TODO 数据源注册成功后，还需要手动配置各自的事务，否则在开始事务的时候会造成切换数据源失效（事务一旦开启，连接就不能再改变，除非新开启一个事务）
