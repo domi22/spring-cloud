@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.util.StringUtils;
-import spring.cloud.common.vo.User;
 
 public class UserPermissionUtil {
 
@@ -18,12 +17,12 @@ public class UserPermissionUtil {
         if(StringUtils.isEmpty(user)) {
             return false;
         }else {
-            List<String> str = user.getAllowPermissionService();
-            for (String permissionService : str) {
-                if(url.equalsIgnoreCase(permissionService)) {
-                    return true;
-                }
-            }
+//            List<String> str = user.getAllowPermissionService();
+//            for (String permissionService : str) {
+//                if(url.equalsIgnoreCase(permissionService)) {
+//                    return true;
+//                }
+//            }
             return false;
         }
     }
@@ -40,14 +39,14 @@ public class UserPermissionUtil {
             allowPermissionService.add("client-service");
             allowPermissionService.add("provider-service");
             allowPermissionService.add("SPRING-CLOUD-FEIGN");
-            user.setAllowPermissionService(allowPermissionService);
+//            user.setAllowPermissionService(allowPermissionService);
         }else if(user.getUserName().equals("spring")) {
             List allowPermissionService = new ArrayList();
             allowPermissionService.add("client-service");
-            user.setAllowPermissionService(allowPermissionService);
+//            user.setAllowPermissionService(allowPermissionService);
         } else {
             List allowPermissionService = new ArrayList();
-            user.setAllowPermissionService(allowPermissionService);
+//            user.setAllowPermissionService(allowPermissionService);
         }
     }
 
