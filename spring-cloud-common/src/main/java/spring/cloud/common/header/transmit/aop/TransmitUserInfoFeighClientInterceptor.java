@@ -5,8 +5,8 @@ import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import spring.cloud.common.auth.User;
 import spring.cloud.common.header.transmit.UserInfoContext;
-import spring.cloud.common.vo.User;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
