@@ -17,7 +17,7 @@ public class RedissonConfig {
         //改用redisson后为了之间数据能兼容，这里修改编码为org.redisson.client.codec.StringCodec
 //        config.setCodec(new org.redisson.client.codec.StringCodec());
         config.useSingleServer()
-                .setAddress("redis://127.0.0.1:6379")
+                .setAddress("redis://106.15.235.87:5439")
                 //config.setPassword("password")
                 .setConnectionPoolSize(500) //设置对于master节点的连接池中连接数最大为500
                 .setIdleConnectionTimeout(10000) //如果当前连接池里的连接数量超过了最小空闲连接数，而同时有连接空闲时间超过了该数值，那么这些连接将会自动被关闭，并从连接池里去掉。时间单位是毫秒。

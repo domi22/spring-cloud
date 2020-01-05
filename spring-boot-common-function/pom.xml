@@ -44,6 +44,7 @@
     <!--</dependencyManagement>-->
 
     <dependencies>
+        <!--正常情况下common是不会注册到注册中心的，但是我们的common注册了，所以这里先不依赖-->
         <dependency>
             <groupId>spring.cloud.common</groupId>
             <artifactId>spring-cloud-common</artifactId>
@@ -127,10 +128,6 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.4.1</version>
-        </dependency>
-        <dependency>
-            <groupId>spring.cloud.common</groupId>
-            <artifactId>spring-cloud-common</artifactId>
         </dependency>
     </dependencies>
 

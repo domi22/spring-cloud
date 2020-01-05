@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import spring.boot.common.function.multi.datasource.EnableMultiDataSource;
 
 @SpringBootApplication
-@EnableMultiDataSource
+//@EnableMultiDataSource
 @MapperScan(basePackages = {"spring.boot.common.function.mapper"})
 public class CommonFunctionApp {
 

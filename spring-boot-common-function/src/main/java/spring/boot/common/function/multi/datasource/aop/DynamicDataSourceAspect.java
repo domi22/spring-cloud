@@ -18,7 +18,7 @@ import spring.boot.common.function.multi.datasource.config.DynamicDataSourceCont
 import java.lang.reflect.Method;
 
 @Component
-@Aspect
+//@Aspect
 @Order(2)
 public class DynamicDataSourceAspect {
 
