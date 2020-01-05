@@ -1,8 +1,6 @@
 package spring.boot.common.function.rest.template.config;
 
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4;
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -17,7 +15,6 @@ import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.client.RestTemplate;
 import spring.boot.common.function.rest.template.aop.HttpHeaderInterceptor;
 import spring.boot.common.function.rest.template.aop.TransmitUserInfoFilter;
-
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
@@ -80,19 +77,19 @@ public class RestTemplateConfig {
 
     //创建HTTP客户端工厂
     private ClientHttpRequestFactory createFactory() {
-        if (this.maxTotalConnect <= 0) {
-            SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-            factory.setConnectTimeout(this.connectTimeout);
-            factory.setReadTimeout(this.readTimeout);
-            return factory;
-        }
-        HttpClient httpClient = HttpClientBuilder.create().setMaxConnTotal(this.maxTotalConnect)
-                .setMaxConnPerRoute(this.maxConnectPerRoute).build();
-        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory(
-                httpClient);
-        factory.setConnectTimeout(this.connectTimeout);
-        factory.setReadTimeout(this.readTimeout);
-        return factory;
+//        if (this.maxTotalConnect <= 0) {
+//            SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+//            factory.setConnectTimeout(this.connectTimeout);
+//            factory.setReadTimeout(this.readTimeout);
+//            return factory;
+//        }
+//        HttpClient httpClient = HttpClientBuilder.create().setMaxConnTotal(this.maxTotalConnect)
+//                .setMaxConnPerRoute(this.maxConnectPerRoute).build();
+//        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory(
+//                httpClient);
+//        factory.setConnectTimeout(this.connectTimeout);
+//        factory.setReadTimeout(this.readTimeout);
+        return null;
     }
 
 

@@ -1,9 +1,9 @@
 package spring.boot.common.function.secret;
 
-import org.apache.commons.codec.CharEncoding;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 
 /**
@@ -25,10 +25,10 @@ public class ENCodeTest {
     private static void testUrlEncode() {
         String url = "taobao.comn?name=你好&age=27";
         try {
-            String encode = URLEncoder.encode(url,CharEncoding.UTF_8);
+            String encode = URLEncoder.encode(url,StandardCharsets.UTF_8.name());
             System.out.println("encode>>>" + encode);
 
-            String decode = URLDecoder.decode(encode, CharEncoding.UTF_8);
+            String decode = URLDecoder.decode(encode, StandardCharsets.UTF_8.name());
             System.out.println("decode>>>" + decode);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -44,7 +44,7 @@ public class ENCodeTest {
             // SHA-1  MD5 SAH-256 SHA-512
             MessageDigest md = MessageDigest.getInstance("MD5");
             String name = "helloword";
-            md.update(name.getBytes(CharEncoding.UTF_8));
+            md.update(name.getBytes(StandardCharsets.UTF_8.name()));
             byte[] digest = md.digest();
 
         } catch (NoSuchAlgorithmException e) {

@@ -1,4 +1,4 @@
-package spring.boot.common.function.rest.template;
+package spring.boot.common.function.rest.template.beans;
 
 public class UserInfoContext {
 

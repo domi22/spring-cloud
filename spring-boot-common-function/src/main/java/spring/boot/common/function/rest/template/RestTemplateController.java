@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import spring.boot.common.function.rest.template.beans.Person;
+import spring.boot.common.function.rest.template.beans.ResultObj;
+
 import java.util.*;
 
 /**

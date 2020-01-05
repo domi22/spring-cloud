@@ -6,7 +6,7 @@ import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
-import spring.boot.common.function.rest.template.UserInfoContext;
+import spring.boot.common.function.rest.template.beans.UserInfoContext;
 import java.io.IOException;
 
 @Component
