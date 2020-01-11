@@ -1,1 +1,0 @@
-select * from table_name where 1 = 1;

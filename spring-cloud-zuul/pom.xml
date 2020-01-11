@@ -15,18 +15,7 @@
     </parent>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <java.version>1.8</java.version>
-        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
 
-        <mybatis.spring>1.2.0</mybatis.spring>
-        <mysql.connector>8.0.7-dmr</mysql.connector>
-        <hikariCP>2.7.9</hikariCP>
-        <fast.json>1.2.41</fast.json>
-        <apach.commons>2.6</apach.commons>
     </properties>
 
     <!--仅申明所管理的子模块，子模块需要显示引入所需兄弟模块的jar坐标 -->
@@ -64,28 +53,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!--==================== springboot2.0 - mysql - HikariCP连接池(默认) ========================-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency><!--导入spring-boot-starter-jdbc依赖springboot就默认使用Hikari数据库连接池-->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis.spring}</version>
-            <exclusions>
-                <exclusion><!--使用了HikariCP则把tomcat-jdbc连接池排除掉-->
-                    <groupId>org.apache.tomcat</groupId>
-                    <artifactId>tomcat-jdbc</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.connector}</version>
-        </dependency>
-
     </dependencies>
 
     <build>

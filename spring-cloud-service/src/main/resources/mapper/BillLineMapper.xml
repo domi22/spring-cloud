@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="spring.cloud.service.test.db.BillLineMapper">
+<mapper namespace="spring.cloud.service.db.BillLineMapper">
 
     <sql id="allColumn">
         h.id as hid
@@ -33,7 +33,7 @@
         , l.allocation_desc as lallocation_desc
     </sql>
 
-    <resultMap id="allInfo" type="spring.cloud.service.test.db.RefundBillLine">
+    <resultMap id="allInfo" type="spring.cloud.service.db.RefundBillLine">
         <id property="id" column="hid"/>
         <result property="headId" column="hhead_id"/>
         <result property="economicIssueId" column="heconomic_issue_id"/>
@@ -54,7 +54,7 @@
         <collection property="allocations" resultMap="allocationMap"/>
     </resultMap>
 
-    <resultMap id="allocationMap" type="spring.cloud.service.test.db.Allocation">
+    <resultMap id="allocationMap" type="spring.cloud.service.db.Allocation">
         <id property="id" column="lid"/>
         <result property="sqe" column="lsqe"/>
         <result property="lineId" column="lline_id"/>

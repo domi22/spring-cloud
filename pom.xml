@@ -24,9 +24,6 @@
         <module>spring-cloud-gateway</module>
         <module>spring-cloud-common</module>
         <module>spring-boot-common-function</module>
-        <module>spring-cloud-grpc-lib</module>
-        <module>spring-cloud-grpc-server</module>
-        <module>spring-cloud-grpc-client</module>
     </modules>
 
   <properties>
@@ -54,8 +51,6 @@
           <id>snapshots</id><name>Nexus Snapshot Repository</name><url>http://192.168.1.17:8080/repository/zxct/</url>
       </snapshotRepository>
   </distributionManagement>
-
-
 
     <!--仅申明所管理的子模块，子模块需要显示引入所需兄弟模块的jar坐标 -->
   <dependencyManagement>
@@ -153,20 +148,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.connector}</version>
         </dependency>
-
-        <!--================  常用工具包的配置==================.-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fast.json}</version>
-        </dependency>
-        <!-- apach工具包 -->
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>${apach.commons}</version>
-        </dependency>
-
     </dependencies>
 
 
