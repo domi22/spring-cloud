@@ -38,7 +38,7 @@
       <mysql.connector>8.0.7-dmr</mysql.connector>
       <hikariCP>2.7.9</hikariCP>
       <fast.json>1.2.41</fast.json>
-      <apach.commons>2.6</apach.commons>
+      <commons.lang3>3.8</commons.lang3>
   </properties>
 
     <!--配置的是snapshot快照库和release发布库的地址，这里是采用nexus作为镜像服务器-->

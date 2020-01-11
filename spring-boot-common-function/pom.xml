@@ -7,7 +7,6 @@
     <artifactId>spring-boot-common-function</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>spring-boot-common-function</name>
-    <url>http://www.example.com</url>
 
     <parent>
         <groupId>spring.cloud</groupId>
@@ -17,18 +16,6 @@
     </parent>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <java.version>1.8</java.version>
-
-        <mybatis.spring>1.2.0</mybatis.spring>
-        <mysql.connector>8.0.7-dmr</mysql.connector>
-        <hikariCP>2.7.9</hikariCP>
-        <fast.json>1.2.41</fast.json>
-        <common.lang3>3.8</common.lang3>
-        <redisson>3.9.1</redisson>
     </properties>
     <!--仅申明所管理的子模块，子模块需要显示引入所需兄弟模块的jar坐标 -->
     <!--<dependencyManagement>-->
@@ -47,6 +34,7 @@
         <dependency>
             <groupId>spring.cloud.common</groupId>
             <artifactId>spring-cloud-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -61,31 +49,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <dependency><!-- 4.引入email API-->
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-        <!--==================== springboot2.0 - mysql - HikariCP连接池(默认) ========================-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency><!--导入spring-boot-starter-jdbc依赖springboot就默认使用Hikari数据库连接池-->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis.spring}</version>
-            <exclusions>
-                <exclusion><!--使用了HikariCP则把tomcat-jdbc连接池排除掉-->
-                    <groupId>org.apache.tomcat</groupId>
-                    <artifactId>tomcat-jdbc</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.connector}</version>
-        </dependency>
 
         <!--================  常用工具包的配置1==================.-->
         <dependency>
@@ -97,14 +60,10 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>${common.lang3}</version>
+            <version>${commons.lang3}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
-            <version>${redisson}</version>
-        </dependency>
+
 
         <!-- spring5 WebClient  -->
         <dependency>

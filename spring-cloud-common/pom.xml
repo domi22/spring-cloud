@@ -16,9 +16,9 @@
     </parent>
 
     <properties>
-        <fast.json>1.2.41</fast.json>
-        <commons.lang3>3.8</commons.lang3>
         <token.jjwt>0.9.0</token.jjwt>
+        <redisson>3.9.1</redisson>
+        <validation.api>2.0.1.Final</validation.api>
     </properties>
 
     <!--仅申明所管理的子模块，子模块需要显示引入所需兄弟模块的jar坐标 -->
@@ -40,7 +40,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-
+        <dependency><!-- 4.引入email API-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -59,7 +62,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>${redisson}</version>
+        </dependency>
 
         <!-- 常用工具包的依赖 -->
         <dependency>
@@ -80,7 +87,7 @@
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
+            <version>${validation.api}</version>
         </dependency>
     </dependencies>
 
