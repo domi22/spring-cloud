@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import spring.boot.common.function.annotation.func.BusinessMethodParam;
 import spring.boot.common.function.annotation.func.IBusinessFunc;
-import spring.boot.common.function.util.SpringContextUtil;
+import spring.cloud.common.util.SpringContextUtil;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
