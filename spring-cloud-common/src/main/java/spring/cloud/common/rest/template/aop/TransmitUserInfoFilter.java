@@ -4,8 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
-import spring.boot.common.function.rest.template.beans.UserInfoContext;
-
+import spring.cloud.common.rest.template.beans.UserInfoContext;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

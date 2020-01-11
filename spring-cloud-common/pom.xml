@@ -19,6 +19,7 @@
         <token.jjwt>0.9.0</token.jjwt>
         <redisson>3.9.1</redisson>
         <validation.api>2.0.1.Final</validation.api>
+        <commons.net>3.3</commons.net>
     </properties>
 
     <!--仅申明所管理的子模块，子模块需要显示引入所需兄弟模块的jar坐标 -->
@@ -88,6 +89,12 @@
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <version>${validation.api}</version>
+        </dependency>
+        <!-- ftp工具 -->
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>${commons.net}</version>
         </dependency>
     </dependencies>
 

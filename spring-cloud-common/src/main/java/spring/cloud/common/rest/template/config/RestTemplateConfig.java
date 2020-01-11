@@ -11,8 +11,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.client.RestTemplate;
-import spring.boot.common.function.rest.template.aop.HttpHeaderInterceptor;
-import spring.boot.common.function.rest.template.aop.TransmitUserInfoFilter;
+import spring.cloud.common.header.transmit.aop.HttpHeaderInterceptor;
+import spring.cloud.common.header.transmit.aop.TransmitUserInfoFilter;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
