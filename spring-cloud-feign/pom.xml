@@ -26,7 +26,7 @@
         <mybatis.spring>1.2.0</mybatis.spring>
         <mysql.connector>8.0.7-dmr</mysql.connector>
         <hikariCP>2.7.9</hikariCP>
-        <fast.json>1.2.41</fast.json>
+        <fast.json>1.2.83</fast.json>
         <apach.commons>2.6</apach.commons>
     </properties>
 
